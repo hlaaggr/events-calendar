@@ -2,41 +2,38 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
-import { Navigation } from './components/Navigation'
+
+import { withAuthentication } from './utils/Session';
+
 import {
   Home,
-  Event,
   Auth,
-  User,
-} from './pages/';
+  User
+} from './pages';  
+import Navigation from './common/Navigation';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/app.scss';
 
+const App = () => (
+  <Router>
+    <Navigation />
+    <Switch>
+      <Route  
+        path="/user"
+      >
+        <User />
+      </Route>
+      <Route path="/event" component={Event} />
+      <Route path="/auth" component={Auth} />
+      <Route path="/">
+        <Home />
+      </Route>
+    </Switch>
+  </Router>    
+);
 
-const App = () => {
-  return (
-    <Router>
-      <Navigation/>
-      <Switch>
-        <Route exact path="/user">
-          <User />
-        </Route>
-        <Route path="/event">
-          <Event />
-        </Route>
-        <Route path="/auth">
-          <Auth />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
-  );
-}
+export default withAuthentication(App);
 
-export default App;
