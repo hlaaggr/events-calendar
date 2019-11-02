@@ -14,17 +14,20 @@ import {
   Event,
   Auth,
   User,
-} from './pages/';
+} from './pages/';  
 import Navigation from './common/Navigation';
 import LogoutButton from './components/LogoutButton/LogoutButton';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/app.scss';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       authUser: null,
-    };
-  }
+    };  
+  }  
 
   componentDidMount() {
     this.listener = this.props.firebase.auth.onAuthStateChanged(
@@ -32,20 +35,20 @@ class App extends Component {
         authUser
           ? this.setState({ authUser })
           : this.setState({ authUser: null });
-      },
-    );
-  }
+      },    
+    );  
+  }  
 
   componentWillUnmount() {
     this.listener();
-  }
+  }  
 
   render() {
     return (
       <Router>
         <Navigation authUser={this.state.authUser} />
         <Switch>
-          <Route
+          <Route  
             path="/user"
           >
             <User />
@@ -56,11 +59,10 @@ class App extends Component {
             <Home />
           </Route>
         </Switch>
-      </Router>
+      </Router>    
     );
-  }
-}
+  };    
+};
 
 export default withFirebase(App);
-
 

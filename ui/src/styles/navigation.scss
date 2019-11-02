@@ -1,0 +1,17 @@
+.navbar {
+  margin-bottom: 3rem;
+
+  a, a:hover {
+    color: black;
+  }
+
+  &__brand {
+    margin: 0.5rem 2rem;
+  }
+
+  &__link {
+    padding-right: 4rem;
+    font-weight: bolder;
+  }
+
+}
