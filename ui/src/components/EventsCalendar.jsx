@@ -2,7 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container'
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import { hlaaCalendarUrl } from '../config/google-calendar';
+
 import 'react-big-calendar/lib/sass/styles.scss';
 import './calendar.scss';
 
