@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { AuthUserContext } from '../../utils/Session';
+import PropTypes from 'prop-types';
 import LogoutButton from '../../components/LogoutButton';
 
 
-const Navigation = ({ authUser }) => {
+const Navigation = () => {
   return (
     <nav>
       <li>
@@ -14,14 +15,17 @@ const Navigation = ({ authUser }) => {
       <li>
         <Link to="/event">Event</Link>
       </li>
-      {authUser
-        ? <AuthNavigation />
-        : (
-          <li>
-            <Link to="/auth">Sign In</Link>
-          </li> 
-        )}
-      
+      <AuthUserContext.Consumer>
+        {authUser =>
+          authUser 
+          ? <AuthNavigation />
+          : (
+            <li>
+              <Link to="/auth">Sign In</Link>
+            </li> 
+          )
+        }
+      </AuthUserContext.Consumer>
     </nav>
   );
 };
