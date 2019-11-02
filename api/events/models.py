@@ -1,6 +1,14 @@
 from django.db import models
 
 
+class GCalEvent(models.Model):
+    ...
+    # GCal ID
+
+
 class RSVP(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    event_id = models.CharField(max_length=200)
+    event = models.ForeignKey(GCalEvent)
+    user = ...
+    email = models.EmailField(required=False, blank=True)
+    phone = models.CharField(required=False, blank=True)
+    notified = models.Boolean(default=False)
