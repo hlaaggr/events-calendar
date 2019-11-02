@@ -1,5 +1,35 @@
+@import 'app.scss';
+
 .calendar-container {
   width: 80rem;
   height: 30rem;
   margin: 0 auto;
+  margin-bottom: 5rem;
+
+  .rbc-toolbar-label {
+    text-align: right;
+    font-size: 30px;
+    color: $primary-color;
+  }
+}
+
+.popover {
+  z-index: 10000;
+  padding: 1rem;
+  
+  &__title {
+    font-size: 1.4rem;
+  }
+
+  &__description {
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  &__times,
+  &__location,
+  &__organizer {
+    font-size: 0.8rem;
+    padding-bottom: 0.4rem;
+  }
 }
