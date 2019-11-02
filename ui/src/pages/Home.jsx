@@ -40,9 +40,10 @@ class Home extends React.Component {
         let eventsData = results.items;
 
         eventsData.map((event) => {
-          const { summary, location, start, end, organizer: { email } } = event; 
+          const { summary, description, location, start, end, organizer: { email } } = event; 
           events.push({
             title: summary,
+            description: description,
             start: start.date || start.dateTime,
             end: end.date || end.dateTime,
             location: location,
@@ -109,8 +110,13 @@ class Home extends React.Component {
     return (
       <Container className="home">
         <h1>HLAA Events Calendar</h1>
+        <EventsCalendar 
+          events={filteredEvents.length ? filteredEvents : events} 
+          views={["month"]}
+          popup={true}
+        />
         <Row className="home__filters">
-          <Col xs={5}>
+          <Col xs={6}>
             <Select
               name="Location"
               placeholder="Select Locations"
@@ -120,7 +126,7 @@ class Home extends React.Component {
               isMulti={true}
             />
           </Col>
-          <Col xs={5}>
+          <Col xs={6}>
             <Select
               name="Organizer"
               placeholder="Select Organizers"
@@ -131,11 +137,6 @@ class Home extends React.Component {
             />
           </Col>
         </Row>
-        <EventsCalendar 
-          events={filteredEvents.length ? filteredEvents : events} 
-          views={["month"]}
-          popup={true}
-        />
       </Container>
     );
   }
