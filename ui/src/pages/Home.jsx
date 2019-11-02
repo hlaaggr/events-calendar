@@ -1,6 +1,9 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { EventsCalendar } from '../components/EventsCalendar'
+import { EventsCalendar } from '../components/EventsCalendar';
+
+import '../styles/home.scss';
 
 const CALENDAR_ID = 'hlaa-ggr@hearingloss-ggr.org';
 const API_KEY = 'AIzaSyCEE4HXsxiGA3uh-oD8rLo_egoENeQNmvU'
@@ -41,10 +44,10 @@ class Home extends React.Component {
   render() {
     const { events } = this.state;
     return (
-      <div>
-        Home Page
+      <Container className="home">
+        <h1>HLAA Events Calendar</h1>
         <EventsCalendar events={events} />
-      </div>
+      </Container>
     );
   }
 };
