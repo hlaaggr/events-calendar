@@ -5,13 +5,14 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { EventsCalendar } from './components'
 
 const App = () => {
   return (
     <Router>
-      <div className="App">
-          Hello World
-      </div>
+      <Switch>
+        <Route path="/" component={EventsCalendar} />
+      </Switch>
     </Router>
   );
 }
