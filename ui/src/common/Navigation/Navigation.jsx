@@ -1,51 +1,41 @@
 import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthUserContext } from '../../utils/Session';
-import PropTypes from 'prop-types';
 import LogoutButton from '../../components/LogoutButton';
+import logo from '../../images/HLAAGGR_fullcolor.svg';
 
+import '../../styles/navigation.scss'
 
 const Navigation = () => {
   return (
-    <nav>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      
-      <li>
-        <Link to="/event">Event</Link>
-      </li>
-      <AuthUserContext.Consumer>
-        {authUser =>
-          authUser 
-          ? <AuthNavigation />
-          : (
-            <li>
-              <Link to="/auth">Sign In</Link>
-            </li> 
-          )
-        }
-      </AuthUserContext.Consumer>
-    </nav>
+    <Navbar bg="light" variant="light">
+      <Link to="/" className="navbar__brand">
+        <img src={logo} alt="hlaa logo" height={80} />
+      </Link>
+      <Nav className="ml-auto">
+        <Link to="/" className="navbar__link">Home</Link>
+        <AuthUserContext.Consumer>
+          {authUser =>
+            authUser 
+            ? <AuthNavigation />
+            : (
+              <Link to="/auth" className="navbar__link">Sign In</Link>
+            )
+          }
+        </AuthUserContext.Consumer>
+      </Nav>
+    </Navbar>
   );
 };
 
 const AuthNavigation = () => {
   return (
     <>
-      <li>
-        <Link to="/user">My Account</Link>
-      </li>
-      <li>
-        <LogoutButton />
-      </li>
+      <Link to="/user" className="navbar__link">My Account</Link>
+      <LogoutButton />
     </>
   );
 }
-
-Navigation.propTypes = {
-  
-};
-
 
 export default Navigation;

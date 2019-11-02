@@ -2,21 +2,16 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
-import { AuthUserContext } from './utils/Session';
-import { withFirebase } from './utils/Firebase';
 import { withAuthentication } from './utils/Session';
-import withAuthProtection from './utils/withAuthProtection';
 
 import {
   Home,
-  Event,
   Auth,
-  User,
-} from './pages/';  
+  User
+} from './pages';  
 import Navigation from './common/Navigation';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
