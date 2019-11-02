@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import logo from '../images/logo.jpg';
+import logo from '../images/HLAAGGR_fullcolor.svg';
 
 import '../styles/navigation.scss'
 
@@ -9,7 +9,7 @@ import '../styles/navigation.scss'
 export const Navigation = () => {
   return (
     <Navbar bg="light" variant="light">
-      <Link to="/">
+      <Link to="/" className="navbar__brand">
         {/* do they have a transparent logo? */}
         {/* also should update the favicon */}
         <img src={logo} alt="hlaa logo" height={80}/>
