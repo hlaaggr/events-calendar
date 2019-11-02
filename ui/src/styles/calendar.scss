@@ -1,5 +1,16 @@
+@import 'app.scss';
+
 .calendar-container {
   width: 80rem;
   height: 30rem;
   margin: 0 auto;
+
+  span.rbc-btn-group:nth-of-type(1) {
+    display: none;
+  }
+  .rbc-toolbar-label {
+    text-align: left;
+    font-size: 30px;
+    color: $primary-color;
+  }
 }
