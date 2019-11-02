@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+import { Navigation } from './components/Navigation'
 import {
   Home,
   Event,
@@ -13,15 +13,14 @@ import {
   User,
 } from './pages/';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/app.scss';
+
+
 const App = () => {
   return (
     <Router>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/user">My Account</Link>
-        <Link to="/event">Event</Link>
-        <Link to="/auth">Sign Up / Sign In</Link>
-      </nav>
+      <Navigation/>
       <Switch>
         <Route exact path="/user">
           <User />

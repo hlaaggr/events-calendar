@@ -1,0 +1,13 @@
+.navbar {
+  margin-bottom: 3rem;
+
+  a, a:hover {
+    color: black;
+  }
+
+  &__link {
+    padding-right: 4rem;
+    font-weight: bolder;
+  }
+
+}
