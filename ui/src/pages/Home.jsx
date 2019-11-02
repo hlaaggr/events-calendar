@@ -43,7 +43,7 @@ class Home extends React.Component {
     return (
       <div>
         Home Page
-      <EventsCalendar events={events} />
+        <EventsCalendar events={events} />
       </div>
     );
   }
