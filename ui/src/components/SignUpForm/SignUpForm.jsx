@@ -49,7 +49,7 @@ const SignUpFormBase = ({ firebase, history }) => {
             <input type="text" {...bindPasswordTwo} />
           </label>
           {error && <p>{error.message}</p>}
-          <button type="submit" disabled={isInvalid}>Submit</button>
+          <button type="submit" className="button button--primary" disabled={isInvalid}>Submit</button>
         </form>
     </div>
   );

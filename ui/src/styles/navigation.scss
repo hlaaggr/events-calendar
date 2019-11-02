@@ -1,8 +1,20 @@
+@import 'app.scss';
+
 .navbar {
   margin-bottom: 3rem;
+  background-color: $primary-color;
 
-  a, a:hover {
-    color: black;
+  a, a:hover, button {
+    color: #fff;
+  }
+
+  button {
+    border: none;
+    background: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__brand {

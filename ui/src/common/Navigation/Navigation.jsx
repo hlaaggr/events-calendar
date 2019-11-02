@@ -3,13 +3,13 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthUserContext } from '../../utils/Session';
 import LogoutButton from '../../components/LogoutButton';
-import logo from '../../images/HLAAGGR_fullcolor.svg';
+import logo from '../../images/HLAAGGR_logo_webwhite.png';
 
 import '../../styles/navigation.scss'
 
 const Navigation = () => {
   return (
-    <Navbar bg="light" variant="light">
+    <Navbar>
       <Link to="/" className="navbar__brand">
         <img src={logo} alt="hlaa logo" height={80} />
       </Link>
