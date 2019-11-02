@@ -1,19 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
+import { Container } from 'react-bootstrap';
+import { AuthUserContext } from '../../src/utils/Session';
 
 const User = () => {
   return (
-    <div>
-      User Page
-    </div>
+    <AuthUserContext.Consumer>
+      {authUser => (
+        <Container>
+          <h1>Account Details</h1>
+
+          <div>Email: {authUser.email}</div>
+          <div>Name: {authUser.displayName}</div>
+          <div>Phone Number: {authUser.phoneNumber}</div>
+
+        </Container>
+      )}
+    </AuthUserContext.Consumer>
   );
 };
-
-
-User.propTypes = {
-  
-};
-
 
 export default User;
