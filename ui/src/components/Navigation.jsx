@@ -10,8 +10,6 @@ export const Navigation = () => {
   return (
     <Navbar bg="light" variant="light">
       <Link to="/" className="navbar__brand">
-        {/* do they have a transparent logo? */}
-        {/* also should update the favicon */}
         <img src={logo} alt="hlaa logo" height={80}/>
       </Link>
       <Nav className="ml-auto">
