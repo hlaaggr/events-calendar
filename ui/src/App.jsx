@@ -4,32 +4,27 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-
-import { withAuthentication } from './utils/Session';
-
 import {
   Home,
   Auth,
   User
 } from './pages';  
+import { withAuthentication } from './utils/Session';
 import Navigation from './common/Navigation';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/app.scss';
 
-const App = () => (
+const App = ({ firebase: { auth : { currentUser } } }) => (
   <Router>
-    <Navigation />
+    <Navigation user={currentUser}/>
     <Switch>
-      <Route  
-        path="/user"
-      >
-        <User />
+      <Route path="/user">
+        <User user={currentUser}/>
       </Route>
-      <Route path="/event" component={Event} />
       <Route path="/auth" component={Auth} />
       <Route path="/">
-        <Home />
+        <Home user={currentUser}/>
       </Route>
     </Switch>
   </Router>    

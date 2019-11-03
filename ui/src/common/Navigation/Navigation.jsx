@@ -1,13 +1,12 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { AuthUserContext } from '../../utils/Session';
 import LogoutButton from '../../components/LogoutButton';
 import logo from '../../images/HLAAGGR_logo_webwhite.png';
 
 import '../../styles/navigation.scss'
 
-const Navigation = () => {
+const Navigation = ({ user }) => {
   return (
     <Navbar>
       <Link to="/" className="navbar__brand">
@@ -15,15 +14,12 @@ const Navigation = () => {
       </Link>
       <Nav className="ml-auto">
         <Link to="/" className="navbar__link">Home</Link>
-        <AuthUserContext.Consumer>
-          {authUser =>
-            authUser 
-            ? <AuthNavigation />
-            : (
+          {user ? (
+            <AuthNavigation />
+          ) : (
               <Link to="/auth" className="navbar__link">Sign In</Link>
             )
           }
-        </AuthUserContext.Consumer>
       </Nav>
     </Navbar>
   );

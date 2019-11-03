@@ -1,21 +1,21 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { AuthUserContext } from '../../src/utils/Session';
+import { Redirect } from 'react-router-dom';
 
-const User = () => {
+const User = ({ user }) => {
   return (
-    <AuthUserContext.Consumer>
-      {authUser => (
+      user ? (
         <Container>
           <h1>Account Details</h1>
 
-          <div>Email: {authUser.email}</div>
-          <div>Name: {authUser.displayName}</div>
-          <div>Phone Number: {authUser.phoneNumber}</div>
+          <div>Email: {user.email}</div>
+          <div>Name: {user.displayName}</div>
+          <div>Phone Number: {user.phoneNumber}</div>
 
         </Container>
-      )}
-    </AuthUserContext.Consumer>
+      ): (
+        <Redirect to="/auth"/>
+      )
   );
 };
 
