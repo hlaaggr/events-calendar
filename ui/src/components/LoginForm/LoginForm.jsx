@@ -37,7 +37,7 @@ const LoginFormBase = ({ firebase, history }) => {
           <input type="password" {...bindPassword} />
         </label>
         {error && <p>{error.message}</p>}
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" className="button button--primary" />
       </form>
     </div>
   );
