@@ -10,4 +10,5 @@ exports.twoHoursPrior = functions.pubsub.schedule('every 30 mins from 08:15 to 2
 exports.postSurvey = functions.pubsub.schedule('every day 15:00').onRun(notifications.postSurvey);
 exports.postThanks = functions.pubsub.schedule('every day 15:00').onRun(notifications.postThanks);
 
+// The url for this endpoint is https://us-central1-hlaa-calendar-257804.cloudfunctions.net/eventChanged?eventId=XXX
 exports.eventChanged = functions.https.onRequest(notifications.eventChanged);
