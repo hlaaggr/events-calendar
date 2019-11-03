@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import { compose } from 'recompose';
-import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { useInput } from '../../utils/hooks/useInput';
 import { withFirebase } from '../../utils/Firebase';
 
+import '../../styles/form.scss'
 
-const SignUpFormBase = ({ firebase, history }) => {
+const SignUpFormBase = ({ firebase, history, ...props }) => {
   const { value:email, bind:bindEmail, reset:resetEmail } = useInput('');
   const { value:passwordOne, bind:bindPasswordOne, reset:resetPasswordOne } = useInput('');
   const { value:passwordTwo, bind:bindPasswordTwo, reset:resetPasswordTwo } = useInput('');
@@ -23,7 +24,7 @@ const SignUpFormBase = ({ firebase, history }) => {
         history.push('/')
       })
       .catch((error) => {
-        setError(error);
+        setError(error.message);
       }) 
   }
 
@@ -33,25 +34,37 @@ const SignUpFormBase = ({ firebase, history }) => {
       email === '';
 
   return (
-    <div>
-      <p>Create Account:</p>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Email:
-            <input type="text" {...bindEmail} />
-          </label>
-          <label>
-            Password:
-            <input type="text" {...bindPasswordOne} />
-          </label>
-          <label>
-            Confirm Password:
-            <input type="text" {...bindPasswordTwo} />
-          </label>
-          {error && <p>{error.message}</p>}
-          <button type="submit" className="button button--primary" disabled={isInvalid}>Submit</button>
-        </form>
-    </div>
+    <Container className="form">
+      <Row className="justify-content-center">
+        <Col xs={10} md={6}>
+          <h1>Sign Up Here</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="form-input form-input__email">
+              <label htmlFor="email">Email</label>
+              <input id="email" type="text" {...bindEmail} />
+            </div>
+
+            <div className="form-input form-input__password">
+              <label htmlFor="password"> Password </label>
+              <input id="password" type="password" {...bindPasswordOne} />
+            </div>
+
+            <div className="form-input form-input__password">
+              <label htmlFor="password-confirm"> Confirm Password </label>
+              <input id="password-confirm" type="password" {...bindPasswordTwo} />
+            </div>
+            {error && <p>{error}</p>}
+            <div className="form-input form-input__button">
+              <input type="submit" value="submit" className="button button--primary" disabled={isInvalid}/>
+            </div>
+          </form>
+          <div className="form__helper-text">
+            Already have an account?
+            <a onClick={() => props.setIsLoginPage(true)} className="cta"> Sign in here! </a>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

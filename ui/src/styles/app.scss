@@ -36,3 +36,16 @@ h1, h2, h3 {
 
 }
 
+
+.cta {
+  color: $primary-color!important;
+
+  &--secondary {
+    color: $accent-green!important;
+  }
+}
+
+.cta:hover {
+  text-decoration: underline!important;
+  cursor: pointer;
+}

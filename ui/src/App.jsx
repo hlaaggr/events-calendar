@@ -11,6 +11,7 @@ import {
 } from './pages';  
 import { withAuthentication } from './utils/Session';
 import Navigation from './common/Navigation';
+import PasswordForgetForm from './components/PasswordForgetForm';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/app.scss';
@@ -22,7 +23,12 @@ const App = ({ firebase: { auth : { currentUser } } }) => (
       <Route path="/user">
         <User user={currentUser}/>
       </Route>
-      <Route path="/auth" component={Auth} />
+      <Route path="/auth">
+        <Auth user={currentUser}/>
+      </Route>
+      <Route path="/forgot">
+        <PasswordForgetForm />
+      </Route>
       <Route path="/">
         <Home user={currentUser}/>
       </Route>

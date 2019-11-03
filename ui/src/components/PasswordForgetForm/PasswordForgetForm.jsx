@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 import { withFirebase } from '../../utils/Firebase';
 
 const INITIAL_STATE = {
@@ -30,22 +30,29 @@ class PasswordForgetFormBase extends Component {
     const { email, error } = this.state;
     const isInvalid = email === '';
     return (
-        <div>
-            <h3>Forgot your password?</h3>
+      <Container className="form">
+        <Row className="justify-content-center">
+          <Col xs={10} md={6}>
+            <h1>Reset your password</h1>
             <form onSubmit={this.onSubmit}>
+              <div className="form-input form-input__email">
+                <label htmlFor="email">Email</label>
                 <input
-                name="email"
-                value={this.state.email}
-                onChange={this.onChange}
-                type="text"
-                placeholder="Email Address"
+                  id="email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  type="text"
                 />
-                <button disabled={isInvalid} type="submit">
-                Reset My Password
-                </button>
-                {error && <p>{error.message}</p>}
+              </div>
+              <div className="form-input form-input__button">
+                <input disabled={isInvalid} type="submit" value="Reset" className="button button--primary"/>
+              </div>
+              {error && <p>{error.message}</p>}
             </form>
-        </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

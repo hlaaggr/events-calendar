@@ -1,26 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FirebaseContext } from '../utils/Firebase/';
+import React, { useState } from 'react';
 import SignUpForm from '../components/SignUpForm';
 import LoginForm from '../components/LoginForm';
-import LogoutButton from '../components/LogoutButton';
-import PasswordForgetForm from '../components/PasswordForgetForm';
+import { Redirect } from 'react-router-dom';
 
-const Auth = () => {
+const Auth = ({ user }) => {
+  const [isLoginPage, setIsLoginPage] = useState(true);
+
+  const loggedOutView = () => {
+    return isLoginPage ? <LoginForm setIsLoginPage={setIsLoginPage} /> : <SignUpForm setIsLoginPage={setIsLoginPage} />
+  }
+
   return (
-    <div>
-      <SignUpForm />
-      <LoginForm />
-      <br />
-      <LogoutButton />
-      <br />
-      <PasswordForgetForm />
-    </div>
+    <> 
+      {user ? <Redirect to="/user"/> : loggedOutView() }
+    </>
   );
 };
 
-Auth.propTypes = {
-  
-};
-
 export default Auth;
+
+
+// import LogoutButton from '../components/LogoutButton';
+// import PasswordForgetForm from '../components/PasswordForgetForm';
+// <br />
+  // <LogoutButton />
+  // <br />
+  // <PasswordForgetForm /> 
+  // reset should also be under user
