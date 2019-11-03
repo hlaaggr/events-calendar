@@ -45,121 +45,33 @@ const NewEvent = ({ user }) => {
   }
 
   const allInputs = [
-    {
-      label: "email",
-      func: bindEmail
-    },
-    {
-      label: "host name",
-      function: bindHostName
-    },
-    {
-      label: 'host location',
-      function: bindHostLocation
-    },
-    {
-      label: 'address one',
-      function: bindAddressOne
-    },
-    {
-      label: 'address two',
-      function: bindAddressTwo
-    },
-    {
-      label: 'city',
-      function: bindCity
-    },
-    {
-      label: 'state',
-      function: bindState
-    },
-    {
-      label: 'zip code',
-      function: bindZipcode
-    },
-    {
-      label: 'contact number',
-      function: bindContactNumber
-    },
-    {
-      label: 'primary communication method',
-      function: bindCommunicationMode
-    },
-    {
-      label: 'event link',
-      function: bindEventLink
-    },
-    {
-      label: 'event description',
-      function: bindEventDescription
-    },
-    {
-      label: 'event category',
-      function: bindCategory
-    },
-    {
-      label: 'cost to attend',
-      function: bindCost
-    },
-    {
-      label: 'how to pay',
-      function: bindHowToPay
-    },
-    {
-      label: 'rsvp link',
-      function: bindRsvpLink
-    },
-    {
-      label: 'start date',
-      function: bindStartDate,
-      type: "date"
-    },
-    {
-      label: 'end date',
-      function: bindEndDate,
-      type: "date"
-    },
-    {
-      label: 'start time',
-      function: bindStartTime,
-      type: "time"
-    },
-    {
-      label: 'end time',
-      function: bindEndTime,
-      type: "time"
-    },
-    {
-      label: 'CART',
-      function: bindCart
-    },
-    {
-      label: 'notes',
-      function: bindNotes
-    },
-    {
-      label: 'parking',
-      function: bindParking
-    },
-    {
-      label: 'refreshments',
-      function: bindRefreshments
-    },
-    {
-      label: 'accessible venue',
-      function: bindIsAccessibleVenue,
-      type: "checkbox"
-    },
-    {
-      label: 'asl interpreter present',
-      function: bindHasASLInterpreter,
-      type: "checkbox"
-    },
-    {
-      label: 'Looped?',
-      function: bindIsLooped,
-      type: "checkbox"
-    },
+    { label: "email", func: bindEmail },
+    { label: "host name", function: bindHostName },
+    { label: 'host location', function: bindHostLocation },
+    { label: 'address one', function: bindAddressOne },
+    { label: 'address two', function: bindAddressTwo },
+    { label: 'city', function: bindCity },
+    { label: 'state', function: bindState },
+    { label: 'zip code', function: bindZipcode },
+    { label: 'contact number',function: bindContactNumber },
+    { label: 'primary communication method', function: bindCommunicationMode },
+    { label: 'event link', function: bindEventLink },
+    { label: 'event description', function: bindEventDescription },
+    { label: 'event category', function: bindCategory },
+    { label: 'cost to attend', function: bindCost },
+    { label: 'how to pay', function: bindHowToPay },
+    { label: 'rsvp link', function: bindRsvpLink },
+    { label: 'start date', function: bindStartDate, type: "date" },
+    { label: 'end date', function: bindEndDate, type: "date" },
+    { label: 'start time', function: bindStartTime, type: "time" },
+    { label: 'end time', function: bindEndTime, type: "time" },
+    { label: 'CART', function: bindCart },
+    { label: 'notes', function: bindNotes },
+    { label: 'parking', function: bindParking },
+    { label: 'refreshments', function: bindRefreshments },
+    { label: 'accessible venue', function: bindIsAccessibleVenue, type: "checkbox" },
+    { label: 'asl interpreter present', function: bindHasASLInterpreter, type: "checkbox" },
+    { label: 'Looped?', function: bindIsLooped, type: "checkbox" }
   ]
 
   return (
