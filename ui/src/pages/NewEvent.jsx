@@ -85,7 +85,7 @@ const NewEvent = ({ user, history, firebase }) => {
   }
 
   const allInputs = [
-    { label: "email", func: bindEmail },
+    { label: "Event Contact (email)", func: eventContact },
     { label: "host name", function: bindHostName },
     { label: 'host location', function: bindHostLocation },
     { label: 'address one', function: bindAddressOne },
