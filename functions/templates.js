@@ -1,4 +1,4 @@
-const moment = require('moment')
+const moment = require('moment');
 
 exports.templates = {
   two_days_prior(event) {
