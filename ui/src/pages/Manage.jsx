@@ -9,6 +9,6 @@ const Manage = () => {
   );
 }
 
-const condition = userAuth => userAuth.role === "ADMIN";
+const condition = authUser => authUser && authUser.email === "hlaa-grr@hearingloss-grr.org";
 
 export default withAuthorization(condition)(Manage);

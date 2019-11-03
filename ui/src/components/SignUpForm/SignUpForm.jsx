@@ -11,27 +11,39 @@ const SignUpFormBase = ({ firebase, history, ...props }) => {
   const { value:email, bind:bindEmail, reset:resetEmail } = useInput('');
   const { value:passwordOne, bind:bindPasswordOne, reset:resetPasswordOne } = useInput('');
   const { value:passwordTwo, bind:bindPasswordTwo, reset:resetPasswordTwo } = useInput('');
+  const { value:phoneNumber, bind:bindPhoneNumber, reset:resetPhoneNumber } = useInput('');
+  const { value:notificationPreference, bind:bindNotificationPreference, reset:resetNotificationPreference } = useInput('');
+
   const [error, setError] = useState(null);
   const handleSubmit = (event) => {
     event.preventDefault();
     firebase
-    .doCreateUserWithEmailAndPassword(email, passwordOne)
-    .then(authUser => {
-        setError(null);
-        resetEmail();
-        resetPasswordOne();
-        resetPasswordTwo();
-        history.push('/')
+    // .doCreateUserWithEmailAndPassword(email, passwordOne)
+    // .then(authUser => {
+    //     setError(null);
+    //     resetEmail();
+    //     resetPasswordOne();
+    //     resetPasswordTwo();
+    //     history.push('/')
+    //   })
+    //   .catch((error) => {
+    //     setError(error.message);
+    //   })
+    .doCreateUser(email, passwordOne, phoneNumber, notificationPreference)
+      .then(() => {
+        history.push("/");
       })
       .catch((error) => {
         setError(error.message);
-      }) 
+      })
   }
 
   const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
-      email === '';
+      email === '' ||
+      phoneNumber === '' ||
+      notificationPreference === '';
 
   return (
     <Container className="form">
@@ -53,7 +65,19 @@ const SignUpFormBase = ({ firebase, history, ...props }) => {
               <label htmlFor="password-confirm"> Confirm Password </label>
               <input id="password-confirm" type="password" {...bindPasswordTwo} />
             </div>
+            
+            <div className="form-input form-input__phone-number">
+              <label htmlFor="password-confirm"> Phone Number </label>
+              <input id="phone-number" type="input" {...bindPhoneNumber} />
+            </div>
+
+            <div className="form-input form-input__phone-number">
+              <label htmlFor="password-confirm"> Notification Preference </label>
+              <input id="notification-preference" type="input" {...bindNotificationPreference} />
+            </div>
+
             {error && <p>{error}</p>}
+
             <div className="form-input form-input__button">
               <input type="submit" value="submit" className="button button--primary" disabled={isInvalid}/>
             </div>
