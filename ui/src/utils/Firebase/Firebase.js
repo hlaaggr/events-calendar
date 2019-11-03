@@ -9,10 +9,6 @@ class Firebase {
       this.auth = app.auth();
       this.db = app.firestore();
     }
-
-    // Auth API
-    // doCreateUserWithEmailAndPassword = (email, password) =>
-    //     this.auth.createUserWithEmailAndPassword(email, password);
     
     doSignInWithEmailAndPassword = (email, password) =>
         this.auth.signInWithEmailAndPassword(email, password);
@@ -49,6 +45,7 @@ class Firebase {
 
     }
 
+    // Not Tested
     doUpdateUser = (user, data) => {
         return user.update(data)
             .catch((error) => {
@@ -56,6 +53,7 @@ class Firebase {
             });
     }
 
+    // Not Tested
     doDeleteUser = (user) => {
         return user.delete()
             .then(() => {
@@ -68,10 +66,8 @@ class Firebase {
             })
     }
 
-    doCreateEvent = () => {
-        return this.db.collection('events').add({
-            // Event Fields
-        })
+    doCreateEvent = (newEvent) => {
+        return this.db.collection('events').add(newEvent)
         .catch((error) => {
             console.error(error);
         })

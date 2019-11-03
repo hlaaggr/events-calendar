@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useInput } from '../utils/hooks/useInput';
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
+import { withFirebase } from '../utils/Firebase';
 
 import '../styles/form.scss';
 
-const NewEvent = ({ user }) => {
-  const { value: email, bind: bindEmail } = useInput('');
+const NewEvent = ({ user, history, firebase }) => {
+  const { value: eventContact, bind: bindEventContact } = useInput('');
   const { value: hostName, bind: bindHostName } = useInput('');
   const { value: hostLocation, bind: bindHostLocation } = useInput('');
   const { value: addressOne, bind: bindAddressOne } = useInput('');
@@ -42,12 +45,49 @@ const NewEvent = ({ user }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // waiting on backend to be built
+    const newEvent = {
+      eventContact,
+      hostName,
+      hostLocation,
+      addressOne,
+      addressTwo,
+      city,
+      state,
+      zipcode,
+      contactNumber,
+      communicationMode,
+      hasASLInterpreter,
+      eventLink,
+      eventDescription,
+      category,
+      cost,
+      howToPay,
+      rsvpLink,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      cart,
+      isLooped,
+      notes,
+      parking,
+      refreshments,
+      isAccessibleVenue,
+    };
+    firebase
+      .doCreateEvent(newEvent)
+        .then(()=> {
+          history.push('/');
+        })
+        .catch((error) => {
+          console.error(error);
+        })
   }
 
   const allInputs = [
     {
-      label: "email",
-      func: bindEmail
+      label: "Event Contact (email)",
+      func: bindEventContact
     },
     {
       label: "host name",
@@ -185,7 +225,10 @@ const NewEvent = ({ user }) => {
   );
 }
 
-export default NewEvent;
+export default compose(
+  withFirebase,
+  withRouter,
+)(NewEvent);
 
 const InputField = (label, func, type = "text") => {
   return (

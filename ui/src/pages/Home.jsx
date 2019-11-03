@@ -7,6 +7,7 @@ import { EventsCalendar } from '../components/EventsCalendar';
 
 import '../styles/home.scss';
 import AddEventButton from '../components/AddEventButton';
+import DeleteUserButton from '../components/DeleteUserButton';
 
 const CALENDAR_ID = 'hlaa-ggr@hearingloss-ggr.org';
 const API_KEY = 'AIzaSyCEE4HXsxiGA3uh-oD8rLo_egoENeQNmvU'
