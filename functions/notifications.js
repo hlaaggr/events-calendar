@@ -1,12 +1,32 @@
 const admin = require('firebase-admin');
+const functions = require('firebase-functions');
 const moment = require('moment');
 const cors = require('cors')({
   origin: true,
 });
+const nodemailer = require('nodemailer');
+const handlebars = require('handlebars');
+
+const SUBJECT = 'HLAA Greater Grand Rapids';
+
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+const mailTransport = nodemailer.createTransport({
+  service: 'gmail', 
+  auth: {
+    user: gmailEmail,
+    pass: gmailPassword,
+  },
+});
 
 const templates = {
   two_days_prior(event, userProfile) {
-    return `Hi ${userProfile.email}, ${event.eventTitle} is happening on ${moment(event.event_begins).toISOString()}`;
+    const data = {event, userProfile}
+
+    template = '<h1> Hello {{userProfile.email}} please go to {{event.eventTitle}}</h1>';
+    template = handlebars.compile(template);
+    //return `Hi ${userProfile.email}, ${event.eventTitle} is happening on ${moment(event.event_begins).toISOString()}`;
+    return template(data)
   },
   event_changed(event, userProfile) {
     return `Hi ${userProfile.email}, ${event.eventTitle} has changed`;
@@ -20,11 +40,14 @@ const notifyUser = (userId, event, template) => {
     .get()
     .then((userProfile) => {
       const templateData = templates[template](event.data(), userProfile.data());
-      console.log(templateData);
+      console.log('user profile')
+      console.log(userProfile.data().email)
+      sendEmail(userProfile.data().email, templateData)
     });
 };
 
 const notifyEvent = (event, template) => {
+  console.log(event);
   const eventRef = admin.firestore().collection('events').doc(event.id);
 
   return admin.firestore()
@@ -54,6 +77,7 @@ exports.twoDaysPrior = () => {
 
   return getEventsInRange(start, end)
     .then((events) => {
+      console.log(events);
       events.forEach((event) => {
         notifyEvent(event, 'two_days_prior');
       });
@@ -77,3 +101,17 @@ exports.eventChanged = (req, res) => {
       });
   });
 };
+
+async function sendEmail(email, html) {
+  const mailOptions = {
+    from: `${SUBJECT} <events@hearinglogss-ggr.com>`,
+    to: email,
+    subject: `Hello from ${SUBJECT}!`,
+    html: html
+  };
+
+  await mailTransport.sendMail(mailOptions);
+  console.log('New email sent to:', email);
+  return null;
+}
+
