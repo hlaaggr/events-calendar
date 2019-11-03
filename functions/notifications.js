@@ -3,7 +3,7 @@ const moment = require('moment');
 
 const templates = {
   two_days_prior(event, userProfile) {
-    return `Hi ${userProfile.email}, ${event.title} is happening on ${moment(event.event_begins).toISOString()}`;
+    return `Hi ${userProfile.email}, ${event.eventTitle} is happening on ${moment(event.event_begins).toISOString()}`;
   },
 };
 
@@ -19,20 +19,18 @@ const notifyUser = (userId, event, template) => {
 };
 
 const notifyEvent = (event, template) => {
+  const eventRef = admin.firestore().collection('events').doc(event.id);
+
   return admin.firestore()
     .collection("rsvps")
-    .where("event_id", "=", event.id)
+    .where("event_id", "==", eventRef)
     .get()
-    .then((rsvp) => {
-      console.log('getting an rsvp')
-      console.log(rsvp)
-      console.log('the event is this one')
-      console.log(event.id)
-      if (rsvp.exists) {
-        return notifyUser(rsvp.data().user_id, event, template);
-      } else {
-        console.log(' it did not exist')
-      }
+    .then((rsvps) => {
+      rsvps.forEach((rsvp) => {
+        if (rsvp.exists) {
+          return notifyUser(rsvp.data().user_id, event, template);
+        }
+      });
     });
 };
 
