@@ -21,19 +21,15 @@ const mailTransport = nodemailer.createTransport({
 
 const templates = {
   two_days_prior(event, userProfile) {
-<<<<<<< HEAD
     const data = {event, userProfile}
 
     template = '<h1> Hello {{userProfile.email}} please go to {{event.eventTitle}}</h1>';
     template = handlebars.compile(template);
     //return `Hi ${userProfile.email}, ${event.eventTitle} is happening on ${moment(event.event_begins).toISOString()}`;
-    return template(data)
-=======
-    return `Hi ${userProfile.email}, ${event.eventTitle} is happening in 2 day son ${moment(event.event_begins).toISOString()}`;
+    return template(data)}
   },
   two_hours_prior(event, userProfile) {
     return `Hi ${userProfile.email}, ${event.eventTitle} is happening in 2 hours on ${moment(event.event_begins).toISOString()}`;
->>>>>>> cddcbaeee5cf1c9ccfae894955f1fe41214aad50
   },
   event_changed(event, userProfile) {
     return `Hi ${userProfile.email}, ${event.eventTitle} has changed`;
