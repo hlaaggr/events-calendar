@@ -18,24 +18,13 @@ const SignUpFormBase = ({ firebase, history, ...props }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     firebase
-    // .doCreateUserWithEmailAndPassword(email, passwordOne)
-    // .then(authUser => {
-    //     setError(null);
-    //     resetEmail();
-    //     resetPasswordOne();
-    //     resetPasswordTwo();
-    //     history.push('/')
-    //   })
-    //   .catch((error) => {
-    //     setError(error.message);
-    //   })
-    .doCreateUser(email, passwordOne, phoneNumber, notificationPreference)
-      .then(() => {
-        history.push("/");
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
+      .doCreateUser(email, passwordOne, phoneNumber, notificationPreference)
+        .then(() => {
+          history.push("/");
+        })
+        .catch((error) => {
+          setError(error.message);
+        })
   }
 
   const isInvalid =
