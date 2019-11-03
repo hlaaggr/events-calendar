@@ -22,10 +22,10 @@ const NewEvent = ({ user }) => {
   const { value: cost, bind: bindCost } = useInput('');
   const { value: howToPay, bind: bindHowToPay } = useInput('');
   const { value: rsvpLink, bind: bindRsvpLink } = useInput('');
-  const { value: startDate, bind: bindStartDate } = useInput(''); // date picker
-  const { value: endDate, bind: bindEndDate } = useInput(''); // date picker
-  const { value: startTime, bind: bindStartTime } = useInput(''); // time picker
-  const { value: endTime, bind: bindEndTime } = useInput(''); // time picker
+  const { value: startDate, bind: bindStartDate } = useInput('');
+  const { value: endDate, bind: bindEndDate } = useInput('');
+  const { value: startTime, bind: bindStartTime } = useInput('');
+  const { value: endTime, bind: bindEndTime } = useInput('');
   const { value: cart, bind: bindCart } = useInput(''); 
   const { value: isLooped, bind: bindIsLooped } = useInput(''); 
   const { value: notes, bind: bindNotes } = useInput(''); 
