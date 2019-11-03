@@ -19,7 +19,7 @@ const NewEvent = ({ user, history, firebase }) => {
   const { value: contactNumber, bind: bindContactNumber } = useInput('');
   const { value: communicationMode, bind: bindCommunicationMode } = useInput('');
   const { value: eventLink, bind: bindEventLink } = useInput('');
-  const { value: eventDescription, bind: bindEventDescription } = useInput('');
+  const { value: eventTitle, bind: bindEventTitle } = useInput('');
   const { value: category, bind: bindCategory } = useInput('');
   const { value: cost, bind: bindCost } = useInput('');
   const { value: howToPay, bind: bindHowToPay } = useInput('');
@@ -58,7 +58,7 @@ const NewEvent = ({ user, history, firebase }) => {
       communicationMode,
       hasASLInterpreter,
       eventLink,
-      eventDescription,
+      eventTitle,
       category,
       cost,
       howToPay,
@@ -88,6 +88,7 @@ const NewEvent = ({ user, history, firebase }) => {
   const allInputs = [
     { label: "Event Contact (email)", func: bindEventContact },
     { label: "host name", func: bindHostName },
+    { label: 'event title', func: bindEventTitle },
     { label: 'host location', func: bindHostLocation },
     { label: 'address one', func: bindAddressOne },
     { label: 'address two', func: bindAddressTwo },
@@ -109,7 +110,6 @@ const NewEvent = ({ user, history, firebase }) => {
     { label: 'parking', func: bindParking },
     { label: 'refreshments', func: bindRefreshments },
     { label: 'notes', func: bindNotes, type: "textarea" },
-    { label: 'event description', func: bindEventDescription, type: "textarea" },
     { label: 'accessible venue', func: bindIsAccessibleVenue, type: "checkbox" },
     { label: 'asl interpreter present', func: bindHasASLInterpreter, type: "checkbox" },
     { label: 'Looped?', func: bindIsLooped, type: "checkbox" }
