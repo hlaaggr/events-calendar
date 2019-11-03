@@ -7,7 +7,9 @@ import {
 import {
   Home,
   Auth,
-  User
+  User,
+  NewEvent,
+  Manage,
 } from './pages';  
 import { withAuthentication } from './utils/Session';
 import Navigation from './common/Navigation';
@@ -29,11 +31,17 @@ const App = ({ firebase: { auth : { currentUser } } }) => (
       <Route path="/forgot">
         <PasswordForgetForm />
       </Route>
+      <Route path="/event">
+        <NewEvent user={currentUser} />
+      </Route>
+      <Route path="/manage">
+        <Manage user={currentUser} />
+      </Route>
       <Route path="/">
         <Home user={currentUser}/>
       </Route>
     </Switch>
-  </Router>    
+  </Router>
 );
 
 export default withAuthentication(App);

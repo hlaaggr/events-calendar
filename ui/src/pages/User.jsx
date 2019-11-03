@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import { withAuthorization } from '../utils/Session';
 
 const User = ({ user }) => {
   return (
@@ -19,4 +20,6 @@ const User = ({ user }) => {
   );
 };
 
-export default User;
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(User);

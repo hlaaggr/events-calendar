@@ -68,7 +68,6 @@ const SignUpFormBase = ({ firebase, history, ...props }) => {
   );
 };
 
-
 SignUpFormBase.propTypes = {
   
 };

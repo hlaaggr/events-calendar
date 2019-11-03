@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { EventsCalendar } from '../components/EventsCalendar';
 
 import '../styles/home.scss';
+import AddEventButton from '../components/AddEventButton';
 
 const CALENDAR_ID = 'hlaa-ggr@hearingloss-ggr.org';
 const API_KEY = 'AIzaSyCEE4HXsxiGA3uh-oD8rLo_egoENeQNmvU'
@@ -106,10 +107,11 @@ class Home extends React.Component {
 
   render() {
     const { events, filteredEvents, allLocations, allOrganizers, selectedLocations, selectedOrganizers } = this.state;
-
+    const { user } = this.props;
     return (
       <Container className="home">
         <h1>HLAA Events Calendar</h1>
+        <AddEventButton user={user} />
         <EventsCalendar 
           events={filteredEvents.length ? filteredEvents : events} 
           views={["month"]}
@@ -146,6 +148,5 @@ class Home extends React.Component {
 Home.propTypes = {
   
 };
-
 
 export default Home;
