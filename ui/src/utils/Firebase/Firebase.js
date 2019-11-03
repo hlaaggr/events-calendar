@@ -30,14 +30,14 @@ class Firebase {
                 // ...
             });
     }
-    
+
     doSignInWithEmailAndPassword = (email, password) =>
         this.auth.signInWithEmailAndPassword(email, password);
 
     doSignOut = () => this.auth.signOut();
 
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
-    
+
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
 
@@ -59,20 +59,32 @@ class Firebase {
             })
     }
 
-    doGetUser = (user) => {
-        
+    doGetUser = (authUid) => {
+        return this.db.collection('user_profiles')
+            .where('authUid', '==', authUid)
+            .limit(1)
+            .get()
+            .then(snapshot => {
+                if (snapshot.empty) {
+                    return Promise.reject({message: "User does not exist"});
+                } else {
+                    const userData = snapshot.docs[0].data();
+                    return Promise.resolve({
+                        id: snapshot.docs[0].id,
+                        ...userData
+                    });
+                }
+            });
     }
 
     doGetUsers = () => {
 
     }
 
-    // Not Tested
-    doUpdateUser = (user, data) => {
-        return user.update(data)
-            .catch((error) => {
-                console.log(error);
-            });
+    doUpdateUser = (userId, data) => {
+        return this.db.collection('user_profiles')
+            .doc(userId)
+            .update(data);
     }
 
     // Not Tested
