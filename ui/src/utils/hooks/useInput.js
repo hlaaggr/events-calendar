@@ -15,3 +15,18 @@ export const useInput = initialValue => {
     }
   };
 };
+
+export const useCheckBox = initialValue => {
+  const [checked, setChecked] = useState(initialValue);
+
+  const toggle = () => setChecked(!checked);
+
+  return {
+    checked,
+    setChecked,
+    bind: {
+      checked, 
+      onChange: toggle
+    }
+  }
+}

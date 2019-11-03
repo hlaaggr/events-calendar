@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useInput } from '../utils/hooks/useInput';
+import { useInput, useCheckBox } from '../utils/hooks/useInput';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../utils/Firebase';
@@ -18,7 +18,6 @@ const NewEvent = ({ user, history, firebase }) => {
   const { value: zipcode, bind: bindZipcode } = useInput('');
   const { value: contactNumber, bind: bindContactNumber } = useInput('');
   const { value: communicationMode, bind: bindCommunicationMode } = useInput('');
-  const { value: hasASLInterpreter, bind: bindHasASLInterpreter } = useInput('');
   const { value: eventLink, bind: bindEventLink } = useInput('');
   const { value: eventDescription, bind: bindEventDescription } = useInput('');
   const { value: category, bind: bindCategory } = useInput('');
@@ -30,11 +29,12 @@ const NewEvent = ({ user, history, firebase }) => {
   const { value: startTime, bind: bindStartTime } = useInput('');
   const { value: endTime, bind: bindEndTime } = useInput('');
   const { value: cart, bind: bindCart } = useInput(''); 
-  const { value: isLooped, bind: bindIsLooped } = useInput(''); 
   const { value: notes, bind: bindNotes } = useInput(''); 
   const { value: parking, bind: bindParking } = useInput(''); 
   const { value: refreshments, bind: bindRefreshments } = useInput(''); 
-  const { value: isAccessibleVenue, bind: bindIsAccessibleVenue } = useInput(''); 
+  const { checked: isLooped, bind: bindIsLooped } = useCheckBox(false); 
+  const { checked: hasASLInterpreter, bind: bindHasASLInterpreter } = useCheckBox(false);
+  const { checked: isAccessibleVenue, bind: bindIsAccessibleVenue } = useCheckBox(false); 
 
   const [error, setError] = useState(null);
 
@@ -74,6 +74,7 @@ const NewEvent = ({ user, history, firebase }) => {
       refreshments,
       isAccessibleVenue,
     };
+
     firebase
       .doCreateEvent(newEvent)
         .then(()=> {
@@ -85,33 +86,33 @@ const NewEvent = ({ user, history, firebase }) => {
   }
 
   const allInputs = [
-    { label: "Event Contact (email)", func: eventContact },
-    { label: "host name", function: bindHostName },
-    { label: 'host location', function: bindHostLocation },
-    { label: 'address one', function: bindAddressOne },
-    { label: 'address two', function: bindAddressTwo },
-    { label: 'city', function: bindCity },
-    { label: 'state', function: bindState },
-    { label: 'zip code', function: bindZipcode },
-    { label: 'contact number',function: bindContactNumber },
-    { label: 'primary communication method', function: bindCommunicationMode },
-    { label: 'event link', function: bindEventLink },
-    { label: 'event description', function: bindEventDescription },
-    { label: 'event category', function: bindCategory },
-    { label: 'cost to attend', function: bindCost },
-    { label: 'how to pay', function: bindHowToPay },
-    { label: 'rsvp link', function: bindRsvpLink },
-    { label: 'start date', function: bindStartDate, type: "date" },
-    { label: 'end date', function: bindEndDate, type: "date" },
-    { label: 'start time', function: bindStartTime, type: "time" },
-    { label: 'end time', function: bindEndTime, type: "time" },
-    { label: 'CART', function: bindCart },
-    { label: 'notes', function: bindNotes },
-    { label: 'parking', function: bindParking },
-    { label: 'refreshments', function: bindRefreshments },
-    { label: 'accessible venue', function: bindIsAccessibleVenue, type: "checkbox" },
-    { label: 'asl interpreter present', function: bindHasASLInterpreter, type: "checkbox" },
-    { label: 'Looped?', function: bindIsLooped, type: "checkbox" }
+    { label: "Event Contact (email)", func: bindEventContact },
+    { label: "host name", func: bindHostName },
+    { label: 'host location', func: bindHostLocation },
+    { label: 'address one', func: bindAddressOne },
+    { label: 'address two', func: bindAddressTwo },
+    { label: 'city', func: bindCity },
+    { label: 'state', func: bindState },
+    { label: 'zip code', func: bindZipcode },
+    { label: 'contact number',func: bindContactNumber },
+    { label: 'primary communication method', func: bindCommunicationMode },
+    { label: 'event link', func: bindEventLink },
+    { label: 'event category', func: bindCategory },
+    { label: 'cost to attend', func: bindCost },
+    { label: 'how to pay', func: bindHowToPay },
+    { label: 'rsvp link', func: bindRsvpLink },
+    { label: 'start date', func: bindStartDate, type: "date" },
+    { label: 'end date', func: bindEndDate, type: "date" },
+    { label: 'start time', func: bindStartTime, type: "time" },
+    { label: 'end time', func: bindEndTime, type: "time" },
+    { label: 'CART', func: bindCart },
+    { label: 'parking', func: bindParking },
+    { label: 'refreshments', func: bindRefreshments },
+    { label: 'notes', func: bindNotes, type: "textarea" },
+    { label: 'event description', func: bindEventDescription, type: "textarea" },
+    { label: 'accessible venue', func: bindIsAccessibleVenue, type: "checkbox" },
+    { label: 'asl interpreter present', func: bindHasASLInterpreter, type: "checkbox" },
+    { label: 'Looped?', func: bindIsLooped, type: "checkbox" }
   ]
 
   return (
@@ -146,7 +147,11 @@ const InputField = (label, func, type = "text") => {
   return (
       <div className="form-input">
         <label htmlFor={`${label}`} style={{textTransform: "capitalize"}}> {label} </label>
-        <input id={`${label}`} type={type} {...func} />
+        {type === "textarea" ? (
+          <textarea id={`${label}`} {...func} rows="3"/>
+        ) : (
+          <input id={`${label}`} type={type} {...func} />
+        )}
       </div>
 
   );
