@@ -1,9 +1,15 @@
 const admin = require('firebase-admin');
 const moment = require('moment');
+const cors = require('cors')({
+  origin: true,
+});
 
 const templates = {
   two_days_prior(event, userProfile) {
     return `Hi ${userProfile.email}, ${event.eventTitle} is happening on ${moment(event.event_begins).toISOString()}`;
+  },
+  event_changed(event, userProfile) {
+    return `Hi ${userProfile.email}, ${event.eventTitle} has changed`;
   },
 };
 
@@ -52,4 +58,22 @@ exports.twoDaysPrior = () => {
         notifyEvent(event, 'two_days_prior');
       });
     });
+};
+
+exports.eventChanged = (req, res) => {
+  if (req.method !== 'POST') {
+    return res.status(403).send('Forbidden!');
+  }
+
+  return cors(req, res, () => {
+    const { eventId } = req.query;
+    return admin.firestore()
+      .collection("events")
+      .doc(eventId)
+      .get()
+      .then((event) => {
+        notifyEvent(event, 'event_changed');
+        return res.status(200).send(`RSVPS for ${event.eventTitle} were notified`);
+      });
+  });
 };
