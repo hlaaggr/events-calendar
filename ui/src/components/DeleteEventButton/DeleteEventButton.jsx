@@ -2,14 +2,18 @@ import React from 'react';
 import { compose } from 'recompose';
 import { withFirebase } from '../../utils/Firebase';
 
-const DeleteEventButton = () => {
-  const handleDeleteEvent = (eventId) => {
-    // call delete event API method
+const DeleteEventButton = ({ eventId, firebase, }) => {
+  const handleDeleteEvent = () => {
+    firebase.
+      doDeleteEvent(eventId)
+        .catch((error) => {
+          console.error(error);
+        })
   }
   return (
     <div>
-      <button type="button" className="button button--secondary">
-        Delete Account
+      <button onClick={handleDeleteEvent} type="button" className="button button--secondary">
+        Reject Event
       </button>
     </div>
   );
